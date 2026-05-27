@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Qurban Bayramınız Mübarək!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --gold-dark: #8a6a1e;
+      --green-deep: #0d2818;
+      --green-mid: #1a4a2e;
+      --green-light: #2a6e43;
+      --cream: #f9f3e3;
+      --ivory: #fdf8ee;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--green-deep);
+      font-family: 'Tajawal', sans-serif;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* === STARS BACKGROUND === */
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gold-light);
+      opacity: 0;
+      animation: twinkle var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: var(--op); transform: scale(1.2); }
+    }
+
+    /* === GEOMETRIC PATTERN OVERLAY === */
+    .pattern {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(
+          60deg,
+          transparent,
+          transparent 40px,
+          rgba(201,168,76,0.04) 40px,
+          rgba(201,168,76,0.04) 41px
+        ),
+        repeating-linear-gradient(
+          -60deg,
+          transparent,
+          transparent 40px,
+          rgba(201,168,76,0.04) 40px,
+          rgba(201,168,76,0.04) 41px
+        );
+    }
+
+    /* === MAIN CARD === */
+    .card {
+      position: relative;
+      z-index: 10;
+      max-width: 680px;
+      width: 90%;
+      background: linear-gradient(160deg, var(--green-mid) 0%, var(--green-deep) 100%);
+      border: 1.5px solid rgba(201,168,76,0.35);
+      border-radius: 4px;
+      padding: 60px 50px 50px;
+      text-align: center;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,0.1),
+        0 0 60px rgba(0,0,0,0.6),
+        0 0 120px rgba(201,168,76,0.08);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* corner ornaments */
+    .card::before, .card::after,
+    .card-inner::before, .card-inner::after {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-color: var(--gold);
+      border-style: solid;
+    }
+    .card::before  { top: 12px; left: 12px;  border-width: 1.5px 0 0 1.5px; }
+    .card::after   { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; }
+    .card-inner::before { bottom: 12px; left: 12px;  border-width: 0 0 1.5px 1.5px; }
+    .card-inner::after  { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; }
+    .card-inner { position: relative; }
+
+    /* === MOON & STAR SVG === */
+    .moon-star {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 24px;
+      animation: floatMoon 4s ease-in-out infinite;
+    }
+    @keyframes floatMoon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .moon-star svg {
+      filter: drop-shadow(0 0 12px rgba(201,168,76,0.7));
+    }
+
+    /* === ARABIC GREETING === */
+    .arabic {
+      font-family: 'Amiri', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(201,168,76,0.4);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.3); }
+      50% { text-shadow: 0 0 35px rgba(201,168,76,0.7); }
+    }
+
+    /* === DIVIDER === */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .divider-diamond {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px rgba(201,168,76,0.6);
+    }
+
+    /* === TITLE === */
+    .title {
+      font-family: 'Amiri', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(201,168,76,0.4);
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: rgba(249,243,227,0.65);
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    /* === MESSAGE === */
+    .message {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(249,243,227,0.85);
+      font-weight: 300;
+      margin-bottom: 32px;
+      padding: 0 10px;
+    }
+
+    /* === WISHES LIST === */
+    .wishes {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .wish-pill {
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 2px;
+      padding: 7px 18px;
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .wish-pill:hover {
+      background: rgba(201,168,76,0.22);
+      transform: translateY(-2px);
+    }
+
+    /* === SIGNATURE === */
+    .signature {
+      padding-top: 22px;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      font-size: 0.82rem;
+      color: rgba(249,243,227,0.4);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* === FLOATING LANTERNS === */
+    .lanterns {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .lantern {
+      position: absolute;
+      bottom: -60px;
+      opacity: 0;
+      animation: riseLantern var(--dur) ease-in var(--delay) infinite;
+      font-size: var(--size);
+    }
+    @keyframes riseLantern {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    /* responsive */
+    @media (max-width: 500px) {
+      .card { padding: 40px 28px 36px; }
+      .title { font-size: 1.9rem; }
+      .arabic { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Geometric overlay -->
+  <div class="pattern"></div>
+
+  <!-- Floating lanterns -->
+  <div class="lanterns" id="lanterns"></div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+    <div class="card-inner">
+
+      <!-- Moon & Star -->
+      <div class="moon-star">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Crescent moon -->
+          <path d="M26 8C17.163 8 10 15.163 10 24C10 32.837 17.163 40 26 40C28.5 40 30.85 39.38 32.92 38.28C28.5 36.7 25.3 32.5 25.3 27.5C25.3 20.5 30.9 14.9 37.9 14.9C38.9 14.9 39.9 15.02 40.82 15.26C38.27 10.92 33.47 8 26 8Z"
+            fill="#c9a84c" stroke="#f0d080" stroke-width="0.8"/>
+          <!-- 5-point star -->
+          <polygon points="43,6 44.5,11 50,11 45.5,14.5 47,19.5 43,16 39,19.5 40.5,14.5 36,11 41.5,11"
+            fill="#f0d080" stroke="#c9a84c" stroke-width="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Arabic -->
+      <div class="arabic">عيد أضحى مبارك</div>
+
+      <!-- Divider -->
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-diamond"></div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Title -->
+      <div class="title">Qurban Bayramınız<br>Mübarək Olsun! 🌙</div>
+      <div class="subtitle">Eid al-Adha 1446</div>
+
+      <!-- Message -->
+      <p class="message">
+        Hörmətli həmkarlarım,<br>
+        Bu mübarək bayram günlərində sizi və ailənizi ürəkdən təbrik edirəm.
+        Qurban Bayramı sizə sağlıq, xoşbəxtlik, bolluq və bərəkət gətirsin.
+        Birlikdə çalışdığımız bu günlər üçün hər birinizə minnətdarlığımı bildirirəm.
+      </p>
+
+      <!-- Wishes -->
+      <div class="wishes">
+        <div class="wish-pill">🌿 Sağlıq</div>
+        <div class="wish-pill">☀️ Xoşbəxtlik</div>
+        <div class="wish-pill">🌾 Bolluq</div>
+        <div class="wish-pill">✨ Bərəkət</div>
+        <div class="wish-pill">🕊️ Sülh</div>
+      </div>
+
+      <!-- Signature -->
+      <div class="signature">Bayramınız Xeyirli Olsun &nbsp;•&nbsp; 2026</div>
+
+    </div>
+  </div>
+
+  <script>
+    // Generate stars
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 3 + 1;
+      s.style.cssText = `
+        left:${Math.random()*100}%;
+        top:${Math.random()*100}%;
+        width:${size}px;
+        height:${size}px;
+        --dur:${2+Math.random()*4}s;
+        --delay:${Math.random()*5}s;
+        --op:${0.3+Math.random()*0.7};
+      `;
+      starsEl.appendChild(s);
+    }
+
+    // Generate floating lanterns (emoji)
+    const lanternEl = document.getElementById('lanterns');
+    const emojis = ['🪔','✨','🌙','⭐','🌟'];
+    for (let i = 0; i < 18; i++) {
+      const l = document.createElement('div');
+      l.className = 'lantern';
+      l.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      const drift = (Math.random()-0.5)*200;
+      l.style.cssText = `
+        left:${Math.random()*100}%;
+        --dur:${8+Math.random()*10}s;
+        --delay:${Math.random()*12}s;
+        --drift:${drift}px;
+        --size:${1+Math.random()*1.2}rem;
+      `;
+      lanternEl.appendChild(l);
+    }
+  </script>
+</body>
+</html>
